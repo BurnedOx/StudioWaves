@@ -1,0 +1,33 @@
+{% extends "works/index.html" %}
+{% load static %}
+
+{% block title %}StudioWaves | Song{% endblock %}
+
+{% block header %}
+<div class="navbar-wrapper">
+    <div class="container">
+        <div class="navbar navbar-inverse navbar-fixed-top animated fadeInDown" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'works:index' %}"><img src="{% static 'images/logo1.png' %}" height="30" alt="logo"/></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+{% block playlist %}
+    <div id="singlesong">
+        <p>Name: {{ song }}</p>
+    <p>Artist: <a href="{% url 'works:SpecificArtist' song.artist %}">{{ song.artist }}</a></p>
+    <p>Album: <a href="{% url 'works:SpecificAlbum' song.album.id %}">{{ song.album }}</a></p>
+    <p><audio controls="controls">
+        <source src="{{ song.audio_track.url }}" type="audio/mpeg"/>
+    </audio>
+</div>
+{% endblock %}

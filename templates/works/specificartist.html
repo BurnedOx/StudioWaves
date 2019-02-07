@@ -1,0 +1,42 @@
+{% extends "works/specificsong.html" %}
+{% load static %}
+
+{% block title %}StudioWaves | Artist{% endblock %}
+
+{% block playlist %}
+
+    <div class="col-sm-3 col-xs-12"><div class="artist"><img src="{{artist.artist_logo.url}}" class="img-responsive" alt="music theme" /></div>
+    <h2>{{artist.artist_name}}</h2>
+    </div>
+
+    <div>
+
+
+        {% if artist.song_set.all %}
+            {% for song in artist.song_set.all %}
+        <ul><a href="{% url 'works:SpecificSong' song.song_title %}">
+            {{song.song_title}}
+        </a>
+            <audio controls="controls"><source src="{{ song.audio_track.url }}" type="audio/mpeg"/></audio></ul>
+            {% endfor %}
+        {% else %}
+            no songs
+        {% endif %}
+
+    </div>
+
+<div class="col-sm-4 col-xs-5 col-sm-offset-5">
+    <h2>ALBUMS</h2>
+    <ul>
+        {% for album in artist.album_set.all %}
+            <li><a href="{% url 'works:SpecificAlbum' album.id %}">{{album}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="spacer"></div>
+
+
+
+
+
+{% endblock %}
